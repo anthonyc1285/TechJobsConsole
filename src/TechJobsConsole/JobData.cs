@@ -49,9 +49,10 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column].ToLower();
+                string aValue = row[column];
+                bool result = aValue.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
 
-                if (aValue.Contains(value.ToLower()))
+                if (result == true)
                 {
                     jobs.Add(row);
                 }
@@ -153,8 +154,12 @@ namespace TechJobsConsole
 
                 foreach (KeyValuePair<string, string> item in jobs)
                 {
-                  
-                    if (item.Value.ToLower().Contains(value) && !query.Contains(jobs))
+                    //Check case insensitivity using IndexOf and StringComparison
+                    string dictValue = item.Value;
+                    bool result = dictValue.IndexOf(value, StringComparison.OrdinalIgnoreCase) >= 0;
+                    //item.Value.ToLower().Contains(value.ToLower())
+
+                    if ( result == true && !query.Contains(jobs))
                     {
                         query.Add(jobs);
                     }
