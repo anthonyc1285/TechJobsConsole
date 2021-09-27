@@ -49,9 +49,9 @@ namespace TechJobsConsole
 
             foreach (Dictionary<string, string> row in AllJobs)
             {
-                string aValue = row[column];
+                string aValue = row[column].ToLower();
 
-                if (aValue.Contains(value))
+                if (aValue.Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
@@ -147,6 +147,7 @@ namespace TechJobsConsole
             LoadData();
             List<Dictionary<string, string>> query = new List<Dictionary<string, string>>();
 
+            //iterate through each dict Value for the search value
             foreach (Dictionary<string,string> jobs in AllJobs)
             {
 
@@ -161,13 +162,16 @@ namespace TechJobsConsole
                 }
             }
 
+            //print out each job added to query list
             foreach (var result in query)
             {
-                foreach(KeyValuePair<string,string> record in result)
+                Console.WriteLine("\n" + "*****");
+                foreach (KeyValuePair<string,string> record in result)
                 {
                     Console.WriteLine(record.Key + " : " + record.Value);
                 }
-                
+                Console.WriteLine("*****" + "\n");
+
             }
            
         }
